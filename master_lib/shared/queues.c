@@ -28,7 +28,7 @@ BaseType_t Queues_SendUARTFrame(uart_packet_t* packet) {
     BaseType_t res = pdFAIL;
 
     // check if silent mode detected
-    if(RF_status == OFF && packet->origin == LINK_RF_UART) {
+    if(RF_status == RF_OFF && packet->origin == LINK_RF_UART) {
         return res;
     }
 

@@ -31,11 +31,18 @@ extern TaskHandle_t StatusInfoTaskHandle;
 
 
 typedef enum {
-    ON = 1,
-    OFF = 0
+    RF_ON = 1,
+    RF_OFF = 0
 } rf_status_t;
 
+typedef enum {
+	ESTOP_ENGAGED = 1, //odcięte
+	ESTOP_DISENGAGED = 0
+
+} remote_estop_status_t;
+
 extern rf_status_t RF_status;
+extern remote_estop_status_t remoteEstopStatus;
 
 
 

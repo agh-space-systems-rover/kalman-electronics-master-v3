@@ -2,6 +2,7 @@
 #include "uart_cmd.h"
 #include "can/commands/can_cmd.h"
 
+remote_estop_status_t remoteEstopStatus = ESTOP_DISENGAGED;
 
 /**
  * Ustawianie zadanej prędkości obrotu oraz wychylenia modułów skrętu.
@@ -17,10 +18,17 @@ void Cmd_UART_Motor_SetWheels(uint8_t *data, uart_packet_link_t link_type) {
         //}
 
         // Update HW struct
-        for (uint8_t i=0; i<4; i++) {
-            bus_motor.required_speed[i] = data[i];
-            bus_motor.required_angle[i] = data[i+4];
-        }
+		if(remoteEstopStatus == ESTOP_DISENGAGED) {
+			for(uint8_t i = 0; i < 4; i++) {
+				bus_motor.required_speed[i] = data[i];
+				bus_motor.required_angle[i] = data[i + 4];
+			}
+		} else {
+			for(uint8_t i = 0; i < 4; i++) {
+				bus_motor.required_speed[i] = 0;
+				bus_motor.required_angle[i] = 0;
+			}
+		}
 
         // Update motor master
         Cmd_Bus_Motor_SetWheels();
@@ -31,6 +39,23 @@ void Cmd_UART_Motor_SetWheels(uint8_t *data, uart_packet_link_t link_type) {
 
         Cmd_UART_BlinkLed(link_type);
     }
+}
+
+/**
+ * Zdalne grzybowanie napędów
+ */
+void CMD_UART_Motor_RemoteEstop(uint8_t* data, uart_packet_link_t link_type) {
+	remoteEstopStatus = data[0];
+
+	uart_packet_t msg = {
+			.cmd = UART_CMD_MOTOR_GET_REMOTE_ESTOP,
+			.arg_count = UART_ARG_MOTOR_GET_REMOTE_ESTOP,
+			.origin = logic.link_type | LINK_RF_UART,
+	};
+
+	msg.args[0] = remoteEstopStatus;
+
+	Queues_SendUARTFrame(&msg);
 }
 
 
@@ -101,3 +126,4 @@ void Cmd_UART_Motor_GetTemperature(void) {
 
     Queues_SendUARTFrame(&msg);
 }
+

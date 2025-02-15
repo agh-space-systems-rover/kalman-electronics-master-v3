@@ -39,7 +39,7 @@ void Cmd_Bus_Drill_Autonomy(uint8_t* data) {
     can_packet_t msg = {
         .cmd = CAN_CMD_DRILL_AUTONOMY,
         .arg_count = CAN_ARG_DRILL_AUTONOMY,
-        .args = data[0]
+        .args = {data[0]}
     };
 
     Queues_SendCANFrame(&msg);
@@ -49,7 +49,7 @@ void Cmd_Bus_Drill_GetWeightRequest(uint8_t* data){
     can_packet_t msg = {
             .cmd = CAN_CMD_DRILL_GET_WEIGHT,
             .arg_count = CAN_ARG_DRILL_GET_WEIGHT,
-            .args = data[0]
+            .args = {data[0]}
 	};
 
     Queues_SendCANFrame(&msg);

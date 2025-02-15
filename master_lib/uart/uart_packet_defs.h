@@ -25,6 +25,11 @@ __unused static uart_packet_def_t uart_packet_defs[] = {
             .arg_count = UART_ARG_MOTOR_CALIBRATE,
             .execute = Cmd_UART_Motor_Calibrate,
         },
+        {
+			.cmd = UART_CMD_MOTOR_REMOTE_ESTOP,
+			.arg_count = UART_ARG_MOTOR_REMOTE_ESTOP,
+			.execute = CMD_UART_Motor_RemoteEstop,
+		},
 
         // --- Arm 6DoF ---
         {

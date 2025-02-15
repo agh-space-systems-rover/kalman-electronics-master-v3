@@ -12,10 +12,12 @@
 
 // --- Master ---
 void Cmd_UART_Master_SetLink(uint8_t* data, uart_packet_link_t link_type);
+void Cmd_UART_SilentMode(uint8_t* data, uart_packet_link_t link_type);
 
 // --- Motor ---
 void Cmd_UART_Motor_SetWheels(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Motor_Calibrate(uint8_t* data, uart_packet_link_t link_type);
+void CMD_UART_Motor_RemoteEstop(uint8_t* data, uart_packet_link_t link_type);
 
 // --- Arm 6DoF ---
 void Cmd_UART_Arm6DOF_SetPos(uint8_t* data, uart_packet_link_t link_type);
@@ -92,7 +94,6 @@ void Cmd_UART_UnknownHandler(uart_packet_t* msg);
 
 // --- Master ---
 void Cmd_UART_Master_SetLinkResponse(uart_packet_link_t new_link);
-void Cmd_UART_SilentMode(uint8_t* data, uart_packet_link_t link_type);
 
 // --- Motor ---
 void Cmd_UART_Motor_GetWheels(void);

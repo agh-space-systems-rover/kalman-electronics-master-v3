@@ -1,7 +1,8 @@
 #include "uart_cmd.h"
 
 
-rf_status_t RF_status = ON;
+rf_status_t RF_status = RF_ON;
+
 
 
 /**
