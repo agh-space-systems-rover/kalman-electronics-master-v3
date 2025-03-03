@@ -29,7 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "Master_Main/Master_Main.h"
+#include "master.h"
 
 /* USER CODE END Includes */
 
@@ -106,7 +106,7 @@ int main(void)
   MX_UART4_Init();
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  Init();
+  master_init();
 
   /* USER CODE END 2 */
 
@@ -211,8 +211,7 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
-  ErrorHandler();
+  master_error_handler();
 
   __disable_irq();
   while (1)

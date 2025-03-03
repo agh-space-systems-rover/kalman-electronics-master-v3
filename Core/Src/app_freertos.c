@@ -26,7 +26,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "shared/tasks.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -127,7 +126,6 @@ void MX_FREERTOS_Init(void) {
   idleTaskHandle = osThreadNew(StartIdleTask, NULL, &idleTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  createTasks();
 
   /* USER CODE END RTOS_THREADS */
 
