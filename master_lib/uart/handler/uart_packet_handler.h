@@ -5,7 +5,7 @@
 #include "task.h"
 
 #define UART_HANDLER_TASK_PRIORITY 7
-#define UART_HANDLER_TASK_STACK_SIZE 512
+#define UART_HANDLER_TASK_STACK_SIZE 1024
 extern StaticTask_t UARTHandlerTaskBuffer;
 extern StackType_t UARTHandlerTaskStack[UART_HANDLER_TASK_STACK_SIZE];
 

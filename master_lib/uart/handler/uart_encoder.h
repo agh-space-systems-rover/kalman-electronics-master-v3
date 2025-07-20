@@ -6,7 +6,7 @@
 
 
 #define UART_ENCODER_TASK_PRIORITY 8
-#define UART_ENCODER_TASK_STACK_SIZE 1024
+#define UART_ENCODER_TASK_STACK_SIZE 2048
 extern StaticTask_t UARTEncoderTaskBuffer;
 extern StackType_t UARTEncoderTaskStack[UART_ENCODER_TASK_STACK_SIZE];
 

@@ -5,6 +5,9 @@ StaticTask_t CANManagerTaskBuffer;
 StackType_t CANManagerTaskStack[CAN_MANAGER_TASK_STACK_SIZE];
 uint32_t can_status = 0;
 
+uint32_t __get_code_from_length(uint8_t bytes_length);
+uint8_t __get_length_from_code(uint32_t length_code);
+
 // --- CAN Filters
 
 const uint8_t canlib_rx_list[CANLIB_RX_LIST_COUNT] = {
@@ -61,7 +64,7 @@ void CANManager_Task(void *argument) {
         can_header.Identifier = msg.cmd;
         can_header.IdType = FDCAN_STANDARD_ID;
         can_header.TxFrameType = FDCAN_DATA_FRAME;
-        can_header.DataLength = msg.arg_count;
+        can_header.DataLength = __get_code_from_length(msg.arg_count);
         can_header.ErrorStateIndicator = FDCAN_ESI_PASSIVE;
         can_header.BitRateSwitch = FDCAN_BRS_OFF;
         can_header.FDFormat = FDCAN_FD_CAN;
@@ -127,7 +130,7 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
     //TODO: error state indicator support
 
     msg.cmd = header.Identifier;
-	msg.arg_count = header.DataLength >> 16;
+	msg.arg_count = __get_length_from_code(header.DataLength);
 
     //TODO: timeouts
     xQueueSendFromISR(can_handler_incoming_packet_queue, &msg, &xHigherPriorityTaskWoken);
@@ -198,4 +201,52 @@ void HAL_FDCAN_ErrorCallback(FDCAN_HandleTypeDef *hfdcan) {
 }
 void HAL_FDCAN_ErrorStatusCallback(FDCAN_HandleTypeDef *hfdcan, uint32_t ErrorStatusITs) {
     GpioExpander_SetLed(LED_CAN_ERR, on, 100);
+}
+
+//implementation of function converting HAL code to actual length
+uint8_t __get_length_from_code(uint32_t length_code){
+    switch (length_code) {
+        case FDCAN_DLC_BYTES_0: return 0;
+        case FDCAN_DLC_BYTES_1: return 1;
+        case FDCAN_DLC_BYTES_2: return 2;
+        case FDCAN_DLC_BYTES_3: return 3;
+        case FDCAN_DLC_BYTES_4: return 4;
+        case FDCAN_DLC_BYTES_5: return 5;
+        case FDCAN_DLC_BYTES_6: return 6;
+        case FDCAN_DLC_BYTES_7: return 7;
+        case FDCAN_DLC_BYTES_8: return 8;
+        case FDCAN_DLC_BYTES_12: return 12;
+        case FDCAN_DLC_BYTES_16: return 16;
+        case FDCAN_DLC_BYTES_20: return 20;
+        case FDCAN_DLC_BYTES_24: return 24;
+        case FDCAN_DLC_BYTES_32: return 32;
+        case FDCAN_DLC_BYTES_48: return 48;
+        case FDCAN_DLC_BYTES_64: return 64;
+        default:
+            return 0x0;
+    }
+}
+
+//implementation of function converting actual length to HAL code
+uint32_t __get_code_from_length(uint8_t bytes_length){
+    switch (bytes_length) {
+        case 0: return FDCAN_DLC_BYTES_0;
+        case 1: return FDCAN_DLC_BYTES_1;
+        case 2: return FDCAN_DLC_BYTES_2;
+        case 3: return FDCAN_DLC_BYTES_3;
+        case 4: return FDCAN_DLC_BYTES_4;
+        case 5: return FDCAN_DLC_BYTES_5;
+        case 6: return FDCAN_DLC_BYTES_6;
+        case 7: return FDCAN_DLC_BYTES_7;
+        case 8: return FDCAN_DLC_BYTES_8;
+        default:
+            if (bytes_length <= 12) return FDCAN_DLC_BYTES_12;
+        if (bytes_length <= 16) return FDCAN_DLC_BYTES_16;
+        if (bytes_length <= 20) return FDCAN_DLC_BYTES_20;
+        if (bytes_length <= 24) return FDCAN_DLC_BYTES_24;
+        if (bytes_length <= 32) return FDCAN_DLC_BYTES_32;
+        if (bytes_length <= 48) return FDCAN_DLC_BYTES_48;
+        if (bytes_length <= 64) return FDCAN_DLC_BYTES_64;
+        return 0x0;
+    }
 }

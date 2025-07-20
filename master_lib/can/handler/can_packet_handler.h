@@ -5,7 +5,7 @@
 #include "task.h"
 
 #define CAN_HANDLER_TASK_PRIORITY 10
-#define CAN_HANDLER_TASK_STACK_SIZE 256
+#define CAN_HANDLER_TASK_STACK_SIZE 1024
 extern StaticTask_t CANHandlerTaskBuffer;
 extern StackType_t CANHandlerTaskStack[CAN_HANDLER_TASK_STACK_SIZE];
 

@@ -10,7 +10,7 @@
 #define CANMANAGER_ACCEPT_ALL_FRAMES 0
 
 #define CAN_MANAGER_TASK_PRIORITY 9
-#define CAN_MANAGER_TASK_STACK_SIZE 1024
+#define CAN_MANAGER_TASK_STACK_SIZE 2048
 
 extern StaticTask_t CANManagerTaskBuffer;
 extern StackType_t CANManagerTaskStack[CAN_MANAGER_TASK_STACK_SIZE];
