@@ -53,7 +53,7 @@ void Cmd_UART_RF_To_ESP32(uint8_t* data, uint8_t len) {
     uart_packet_t msg = {
             .cmd = UART_CMD_RF_TO_ESP32,
             .arg_count = len,
-            .origin = LINK_DEBUG_UART
+            .origin = LINK_WIFI_UART
     };
     memcpy(msg.args, data, len);
 

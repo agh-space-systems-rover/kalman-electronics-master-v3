@@ -62,21 +62,21 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, SATEL_REB_Pin|SATEL_DE_Pin|TCAN_CS_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PCPin PCPin */
+  /*Configure GPIO pins : PC_ON_Pin PC_RESET_Pin */
   GPIO_InitStruct.Pin = PC_ON_Pin|PC_RESET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PBPin PBPin PBPin PBPin */
+  /*Configure GPIO pins : RS422_DE_Pin RS422_RE_Pin TCAN2_CS_Pin WIFI_EN_Pin */
   GPIO_InitStruct.Pin = RS422_DE_Pin|RS422_RE_Pin|TCAN2_CS_Pin|WIFI_EN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin */
+  /*Configure GPIO pins : SATEL_REB_Pin SATEL_DE_Pin TCAN_CS_Pin */
   GPIO_InitStruct.Pin = SATEL_REB_Pin|SATEL_DE_Pin|TCAN_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;

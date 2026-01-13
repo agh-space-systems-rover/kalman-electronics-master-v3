@@ -18,6 +18,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef* huart, uint16_t Size) {
 
 	// Find corresponding parser
 	for (int i = 0; i < UART_DEFS_COUNT; i++) {
+
 		if (parser_defs[i].uart->uart_handle == huart) {
 			parser = &parser_defs[i];
 			break;
