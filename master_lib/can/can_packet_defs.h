@@ -68,16 +68,35 @@ const can_packet_def_t can_packet_defs[] = {
 				.arg_count = CAN_ARG_UNIVERSAL_INPUT_RESPONSE,
 				.execute = Cmd_Bus_Universal_InputResponse
 		},
-		{
-				.cmd = CAN_CMD_UNIVERSAL_STEPPER_POSITION_RESPONSE,
-				.arg_count = CAN_ARG_UNIVERSAL_STEPPER_POSITION_RESPONSE,
-				.execute = Cmd_Bus_Universal_StepperPositionResponse
-		},
+		// {
+		// 		.cmd = CAN_CMD_UNIVERSAL_STEPPER_POSITION_RESPONSE,
+		// 		.arg_count = CAN_ARG_UNIVERSAL_STEPPER_POSITION_RESPONSE,
+		// 		.execute = Cmd_Bus_Universal_StepperPositionResponse
+		// },
 		{
 				.cmd = CAN_CMD_UNIVERSAL_AUTOMATION_SEQUENCE_STATE_RESPONSE,
 				.arg_count = CAN_ARG_UNIVERSAL_AUTOMATION_SEQUENCE_STATE_RESPONSE,
 				.execute = Cmd_Bus_Universal_SetResponse
+		},	
+		// Distance response: response ID 0x5A / 4 bytes (protocol spec)
+		{
+				.cmd = CAN_CMD_UNIVERSAL_DISTANCE_RESPONSE,
+				.arg_count = CAN_ARG_UNIVERSAL_DISTANCE_RESPONSE,
+				.execute = Cmd_Bus_Universal_DistanceResponse
 		},
+		
+		// --- Power Distribution ---
+		{
+				.cmd = CAN_CMD_VOLTAGE_RESPONSE,
+				.arg_count = CAN_ARG_VOLTAGE_RESPONSE,
+				.execute = Cmd_Bus_PowerDistribution_VoltageResponse,
+		},
+		{
+				.cmd = CAN_CMD_SENSOR_RESPONSE,
+				.arg_count = CAN_ARG_SENSOR_RESPONSE,
+				.execute = Cmd_Bus_PowerDistribution_SensorResponse,
+		},
+
 		// --- Science ---
 		{
 				.cmd = CAN_CMD_SCIENCE_GET_TEMPERATURE1,
@@ -123,6 +142,12 @@ const can_packet_def_t can_packet_defs[] = {
 				.arg_count = CAN_ARG_DRILL_SEND_WEIGHT,
 				.execute = Cmd_Bus_Drill_GetWeight
 		},
+		{
+				.cmd = CAN_CMD_DRILL_TELEMETRY,
+				.arg_count = CAN_ARG_DRILL_TELEMETRY,
+				.execute = Cmd_Bus_Drill_Telemetry
+		},
+
 
 		// --- Fallback handlers ---
 		//TODO: uh, how

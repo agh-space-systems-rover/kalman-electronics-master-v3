@@ -62,3 +62,17 @@ void Cmd_Bus_Drill_GetWeight(uint8_t* data){
 
     Cmd_UART_Drill_GetWeight(weight);
 }
+
+void Cmd_Bus_Drill_Telemetry(uint8_t* data){
+    struct DrillTelemetry {
+        uint8_t limit_sw_up;
+        uint8_t limit_sw_down;
+        uint8_t autonomy_state;
+        uint8_t based_status;
+        int32_t reserved; // for future use
+    } __attribute__((packed)) telemetry;
+
+    memcpy(&telemetry, data, sizeof(struct DrillTelemetry));
+
+    Cmd_UART_Drill_Telemetry((uint8_t*)&telemetry);
+}

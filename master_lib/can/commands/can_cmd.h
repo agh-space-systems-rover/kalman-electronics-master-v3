@@ -26,6 +26,7 @@ void Cmd_Bus_Universal_WeightResponse(uint8_t *data);
 void Cmd_Bus_Universal_InputResponse(uint8_t *data);
 void Cmd_Bus_Universal_StepperPositionResponse(uint8_t *data);
 void Cmd_Bus_Universal_AutomationSequenceStateResponse(uint8_t* data);
+void Cmd_Bus_Universal_DistanceResponse(uint8_t* data);
 
 // --- Science ---
 void Cmd_Bus_Science_GetTemperature1(uint8_t* data);
@@ -44,7 +45,11 @@ void Cmd_Bus_EmptyHandler(uint8_t* msg);
 
 // --- Drill ---
 void Cmd_Bus_Drill_GetWeight(uint8_t* data);
+void Cmd_Bus_Drill_Telemetry(uint8_t* data);
 
+// -- Power Distribution ---
+void Cmd_Bus_PowerDistribution_VoltageResponse(uint8_t* data);
+void Cmd_Bus_PowerDistribution_SensorResponse(uint8_t* data);
 /*
  *  TX Frames
  */
@@ -93,7 +98,7 @@ void Cmd_Bus_Universal_StepperPositionRequest(uint8_t* data);
 void Cmd_Bus_Universal_AutomationSequenceBeginRequest(uint8_t* data);
 void Cmd_Bus_Universal_AutomationSequenceStateRequest(uint8_t* data);
 void Cmd_Bus_Universal_WeightTareRequest(uint8_t* data);
-
+void Cmd_Bus_Universal_SetDistanceMeasurement(const uint8_t* data);
 // --- Science ---
 
 // --- Mobilab v2 ---
@@ -102,7 +107,6 @@ void Cmd_Bus_Mobilab_SetHeater(const uint8_t* data);
 void Cmd_Bus_Mobilab_SetBacklight(const uint8_t* data);
 void Cmd_Bus_Mobilab_SetAux(const uint8_t* data);
 void Cmd_Bus_Mobilab_SetServo(const uint8_t* data);
-
 // --- Mux --
 void Cmd_Bus_Mux_SetChannel(uint8_t vtx, uint8_t channel);
 void Cmd_Bus_Mux_SetCam(uint8_t vtx, uint8_t cam);

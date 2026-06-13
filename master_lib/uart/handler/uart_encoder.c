@@ -12,7 +12,7 @@ void UARTEncoder_EncodeToBuf(uart_encoder_t* encoder, uart_packet_t* msg);
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef* huart) {
     uart_encoder_t* encoder = NULL;
-
+ 
     // Find corresponding encoder
     for (int i = 0; i < UART_DEFS_COUNT; i++) {
         if (encoder_defs[i].uart->uart_handle == huart) {

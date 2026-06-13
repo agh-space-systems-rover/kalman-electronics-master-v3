@@ -54,6 +54,12 @@ void Cmd_UART_Universal_AutomationSequenceStateRequest(uint8_t* data, uart_packe
     Cmd_UART_BlinkLed(link_type);
 }
 
+void Cmd_UART_Universal_SetDistanceMeasurement(uint8_t* data, uart_packet_link_t link_type) {
+    Cmd_Bus_Universal_SetDistanceMeasurement(data);
+    Cmd_UART_BlinkLed(link_type);
+}
+
+
 void Cmd_UART_Universal_SetResponse(uint8_t* data) {
     uart_packet_t msg = {
         .cmd = UART_CMD_UNIVERSAL_SET_RESPONSE,
@@ -112,6 +118,21 @@ void Cmd_UART_Universal_AutomationSequenceStateResponse(uint8_t* data){
 };
 
     memcpy(&msg.args, data, UART_ARG_UNIVERSAL_STEPPER_POSITION_RESPONSE);
+
+    Queues_SendUARTFrame(&msg);
+    Cmd_UART_BlinkLed(logic.link_type);
+}
+
+
+void Cmd_UART_Universal_DistanceResponse(uint8_t* data){
+    uart_packet_t msg = {
+            .cmd = UART_CMD_UNIVERSAL_DISTANCE_RESPONSE,
+            .arg_count = UART_ARG_UNIVERSAL_DISTANCE_RESPONSE,
+            // .origin = logic.link_type
+            .origin = logic.link_type | LINK_RF_UART // Allow response to be sent to any link, as distance measurement might be requested by different modules
+    };
+
+    memcpy(&msg.args, data, UART_ARG_UNIVERSAL_DISTANCE_RESPONSE);
 
     Queues_SendUARTFrame(&msg);
     Cmd_UART_BlinkLed(logic.link_type);

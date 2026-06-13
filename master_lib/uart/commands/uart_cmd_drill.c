@@ -56,3 +56,15 @@ void Cmd_UART_Drill_GetWeight(int32_t weight){
 
     Queues_SendUARTFrame(&msg);
 }
+\
+void Cmd_UART_Drill_Telemetry(uint8_t* data) {
+    uart_packet_t msg = {
+            .cmd = UART_CMD_DRILL_TELEMETRY,
+            .arg_count = UART_ARG_DRILL_TELEMETRY,
+            .origin = logic.link_type
+    };
+
+    memcpy(&msg.args, data, UART_ARG_DRILL_TELEMETRY);
+
+    Queues_SendUARTFrame(&msg);
+}

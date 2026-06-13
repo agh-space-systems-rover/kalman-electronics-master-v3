@@ -63,13 +63,13 @@ void Cmd_Bus_Universal_SetStepperPosition(uint8_t* data) {
 }
 
 void Cmd_Bus_Universal_StepperHomingRequest(uint8_t* data) {
-    can_packet_t msg = {
-            .cmd = CAN_CMD_UNIVERSAL_STEPPER_HOMING_REQUEST,
-            .arg_count = CAN_ARG_UNIVERSAL_STEPPER_HOMING_REQUEST,
-    };
-    memcpy(&msg.args, data, CAN_ARG_UNIVERSAL_STEPPER_HOMING_REQUEST);
+    // can_packet_t msg = {
+    //         .cmd = CAN_CMD_UNIVERSAL_STEPPER_HOMING_REQUEST,
+    //         .arg_count = CAN_ARG_UNIVERSAL_STEPPER_HOMING_REQUEST,
+    // };
+    // memcpy(&msg.args, data, CAN_ARG_UNIVERSAL_STEPPER_HOMING_REQUEST);
 
-    Queues_SendCANFrame(&msg);
+    // Queues_SendCANFrame(&msg);
 }
 void Cmd_Bus_Universal_WeightRequest(uint8_t* data) {
     can_packet_t msg = {
@@ -99,13 +99,13 @@ void Cmd_Bus_Universal_InputRequest(uint8_t* data) {
     Queues_SendCANFrame(&msg);
 }
 void Cmd_Bus_Universal_StepperPositionRequest(uint8_t* data) {
-    can_packet_t msg = {
-            .cmd = CAN_CMD_UNIVERSAL_STEPPER_POSITION_REQUEST,
-            .arg_count = CAN_ARG_UNIVERSAL_STEPPER_POSITION_REQUEST
-    };
-    memcpy(&msg.args, data, CAN_ARG_UNIVERSAL_STEPPER_POSITION_REQUEST);
+    // can_packet_t msg = {
+    //         .cmd = CAN_CMD_UNIVERSAL_STEPPER_POSITION_REQUEST,
+    //         .arg_count = CAN_ARG_UNIVERSAL_STEPPER_POSITION_REQUEST
+    // };
+    // memcpy(&msg.args, data, CAN_ARG_UNIVERSAL_STEPPER_POSITION_REQUEST);
 
-    Queues_SendCANFrame(&msg);
+    // Queues_SendCANFrame(&msg);
 }
 
 void Cmd_Bus_Universal_AutomationSequenceBeginRequest(uint8_t* data) {
@@ -130,6 +130,18 @@ void Cmd_Bus_Universal_AutomationSequenceStateRequest(uint8_t* data) {
     Queues_SendCANFrame(&msg);
 }
 
+void Cmd_Bus_Universal_SetDistanceMeasurement(const uint8_t* data){
+    can_packet_t msg = {
+            .cmd = CAN_CMD_UNIVERSAL_DISTANCE_REQUEST,
+            .arg_count = CAN_ARG_UNIVERSAL_DISTANCE_REQUEST
+    };
+    memcpy(&msg.args, data, CAN_ARG_UNIVERSAL_DISTANCE_REQUEST);
+
+    Queues_SendCANFrame(&msg);
+
+}
+
+
 void Cmd_Bus_Universal_SetResponse(uint8_t* data) {
     Cmd_UART_Universal_SetResponse(data);
 }
@@ -144,4 +156,7 @@ void Cmd_Bus_Universal_StepperPositionResponse(uint8_t *data) {
 }
 void Cmd_Bus_Universal_AutomationSequenceStateResponse(uint8_t* data) {
     Cmd_UART_Universal_AutomationSequenceStateResponse(data);
+}
+void Cmd_Bus_Universal_DistanceResponse(uint8_t* data) {
+    Cmd_UART_Universal_DistanceResponse(data);
 }

@@ -14,6 +14,10 @@
 void Cmd_UART_Master_SetLink(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_SilentMode(uint8_t* data, uart_packet_link_t link_type);
 
+// -- Power Distribution ---
+void Cmd_UART_PowerDistribution_GetVoltage(uint8_t* data, uart_packet_link_t link_type);
+void Cmd_UART_PowerDistribution_GetSensor(uint8_t* data, uart_packet_link_t link_type);
+
 // --- Motor ---
 void Cmd_UART_Motor_SetWheels(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Motor_Calibrate(uint8_t* data, uart_packet_link_t link_type);
@@ -58,6 +62,7 @@ void Cmd_UART_Universal_WeightTareRequest(uint8_t* data, uart_packet_link_t link
 void Cmd_UART_Universal_InputRequest(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Universal_StepperPositionRequest(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Universal_AutomationSequenceBeginRequest(uint8_t* data, uart_packet_link_t link_type);
+void Cmd_UART_Universal_SetDistanceMeasurement(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Arm6DOF_GetProbeEsp(uint8_t* data, uart_packet_link_t link_type);
 
 // --- Science ---
@@ -110,6 +115,7 @@ void Cmd_UART_Universal_WeightResponse(uint8_t* data);
 void Cmd_UART_Universal_InputResponse(uint8_t* data);
 void Cmd_UART_Universal_StepperPositionResponse(uint8_t* data);
 void Cmd_UART_Universal_AutomationSequenceStateResponse(uint8_t* data);
+void Cmd_UART_Universal_DistanceResponse(uint8_t* data);
 // --- Science ---
 void Cmd_UART_Science_GetAtmosphere(uint8_t id);
 void Cmd_UART_Science_GetWeight(uint8_t id, uint8_t loadcell_index);
@@ -120,7 +126,12 @@ void Cmd_UART_Mobilab_GetTemperature(uint8_t id);
 
 // --- Drill ---
 void Cmd_UART_Drill_GetWeight(int32_t weight);
+void Cmd_UART_Drill_Telemetry(uint8_t* data);
 
+
+// --- Power Distribution ---
+void Cmd_UART_PowerDistribution_VoltageResponse(uint8_t* data);
+void Cmd_UART_PowerDistribution_SensorResponse(uint8_t* data);
 /** Helpers */
 
 void Cmd_UART_BlinkLed(uart_packet_link_t link_type);

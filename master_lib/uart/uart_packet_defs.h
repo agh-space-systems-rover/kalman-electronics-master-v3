@@ -173,11 +173,11 @@ __unused static uart_packet_def_t uart_packet_defs[] = {
             .arg_count = UART_ARG_UNIVERSAL_SET_STEPPER_POSITION,
             .execute = Cmd_UART_Universal_SetStepperPosition
         },
-        {
-            .cmd = UART_CMD_UNIVERSAL_STEPPER_HOMING_REQUEST,
-            .arg_count = UART_ARG_UNIVERSAL_STEPPER_HOMING_REQUEST,
-            .execute = Cmd_UART_Universal_StepperHomingRequest
-        },
+        // {
+        //     .cmd = UART_CMD_UNIVERSAL_STEPPER_HOMING_REQUEST,
+        //     .arg_count = UART_ARG_UNIVERSAL_STEPPER_HOMING_REQUEST,
+        //     .execute = Cmd_UART_Universal_StepperHomingRequest
+        // },
         {
             .cmd = UART_CMD_UNIVERSAL_WEIGHT_REQUEST,
             .arg_count = UART_ARG_UNIVERSAL_WEIGHT_REQUEST,
@@ -193,16 +193,23 @@ __unused static uart_packet_def_t uart_packet_defs[] = {
             .arg_count = UART_ARG_UNIVERSAL_INPUT_REQUEST,
             .execute = Cmd_UART_Universal_InputRequest
         },
-        {
-            .cmd = UART_CMD_UNIVERSAL_STEPPER_POSITION_REQUEST,
-            .arg_count = UART_ARG_UNIVERSAL_STEPPER_POSITION_REQUEST,
-            .execute = Cmd_UART_Universal_StepperPositionRequest
-        },
+        // {
+        //     .cmd = UART_CMD_UNIVERSAL_STEPPER_POSITION_REQUEST,
+        //     .arg_count = UART_ARG_UNIVERSAL_STEPPER_POSITION_REQUEST,
+        //     .execute = Cmd_UART_Universal_StepperPositionRequest
+        // },
         {
             .cmd = UART_CMD_UNIVERSAL_AUTOMATION_SEQUENCE_BEGIN_REQUEST,
             .arg_count = UART_ARG_UNIVERSAL_AUTOMATION_SEQUENCE_BEGIN_REQUEST,
             .execute = Cmd_UART_Universal_AutomationSequenceBeginRequest
         },
+            {
+            .cmd = UART_CMD_UNIVERSAL_SET_DISTANCE_MEASUREMENT,
+            .arg_count = UART_ARG_UNIVERSAL_SET_DISTANCE_MEASUREMENT,
+            .execute = Cmd_UART_Universal_SetDistanceMeasurement
+
+        },
+
 
         // --- Science ---
         {
@@ -280,6 +287,19 @@ __unused static uart_packet_def_t uart_packet_defs[] = {
 
         },
 
+        // --- Power Distribution ---
+        {
+            .cmd = UART_CMD_VOLTAGE_RESPONSE,
+            .arg_count = UART_ARG_VOLTAGE_RESPONSE,
+            .execute = Cmd_UART_PowerDistribution_GetVoltage,
+        },
+        {   
+            .cmd = UART_CMD_SENSOR_RESPONSE,
+            .arg_count = UART_ARG_SENSOR_RESPONSE,
+            .execute = Cmd_UART_PowerDistribution_GetSensor,
+        },
+
+
         // --- Custom ---
         {
             .cmd = UART_CMD_CUSTOM_TO_RF,
@@ -291,6 +311,7 @@ __unused static uart_packet_def_t uart_packet_defs[] = {
             .arg_count = UART_ARG_MAX,
             .execute = Cmd_UART_CustomToUART,
         },
+
         {
             .cmd = UART_CMD_SUPERVISOR_TO_RF,
             .arg_count = UART_ARG_MAX,
