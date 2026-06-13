@@ -78,7 +78,7 @@ void Cmd_Bus_Drill_A_Bridge_Set(uint8_t direction, uint8_t speed);
 void Cmd_Bus_Drill_B_Bridge_Set(uint8_t direction, uint8_t speed);
 void Cmd_Bus_Drill_C_Bridge_Set(uint8_t direction, uint8_t speed);
 void Cmd_Bus_Drill_Autonomy(uint8_t* data);
-void Cmd_Bus_Drill_GetWeightRequest();
+void Cmd_Bus_Drill_SetGear(uint8_t* data);
 
 // --- UEUOS v2 ---
 void Cmd_Bus_Ueuos_SetState(const uint8_t* data);

@@ -137,16 +137,22 @@ const can_packet_def_t can_packet_defs[] = {
 		},
 
 		// --- Drill ---
+		// {
+		// 		.cmd = CAN_CMD_DRILL_SEND_WEIGHT,
+		// 		.arg_count = CAN_ARG_DRILL_SEND_WEIGHT,
+		// 		.execute = Cmd_Bus_Drill_GetWeight
+		// },
 		{
-				.cmd = CAN_CMD_DRILL_SEND_WEIGHT,
-				.arg_count = CAN_ARG_DRILL_SEND_WEIGHT,
-				.execute = Cmd_Bus_Drill_GetWeight
+				.cmd = CAN_CMD_DRILL_TELEMETRY,
+				.arg_count = CAN_ARG_DRILL_TELEMETRY,
+				.execute = Cmd_Bus_Drill_Telemetry
 		},
 		{
 				.cmd = CAN_CMD_DRILL_TELEMETRY,
 				.arg_count = CAN_ARG_DRILL_TELEMETRY,
 				.execute = Cmd_Bus_Drill_Telemetry
 		},
+
 
 
 		// --- Fallback handlers ---

@@ -45,10 +45,10 @@ void Cmd_Bus_Drill_Autonomy(uint8_t* data) {
     Queues_SendCANFrame(&msg);
 }
 
-void Cmd_Bus_Drill_GetWeightRequest(uint8_t* data){
+void Cmd_Bus_Drill_SetGear(uint8_t* data){
     can_packet_t msg = {
-            .cmd = CAN_CMD_DRILL_GET_WEIGHT,
-            .arg_count = CAN_ARG_DRILL_GET_WEIGHT,
+            .cmd = CAN_CMD_DRILL_SET_GEAR,
+            .arg_count = CAN_ARG_DRILL_SET_GEAR,
             .args = {data[0]}
 	};
 
@@ -64,15 +64,9 @@ void Cmd_Bus_Drill_GetWeight(uint8_t* data){
 }
 
 void Cmd_Bus_Drill_Telemetry(uint8_t* data){
-    struct DrillTelemetry {
-        uint8_t limit_sw_up;
-        uint8_t limit_sw_down;
-        uint8_t autonomy_state;
-        uint8_t based_status;
-        int32_t reserved; // for future use
-    } __attribute__((packed)) telemetry;
+    int64_t telemetry;
 
-    memcpy(&telemetry, data, sizeof(struct DrillTelemetry));
+    memcpy(&telemetry, data, sizeof(int64_t));
 
     Cmd_UART_Drill_Telemetry((uint8_t*)&telemetry);
 }

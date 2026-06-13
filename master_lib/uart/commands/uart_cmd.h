@@ -41,7 +41,7 @@ void Cmd_UART_Arm6DOF_GetProbeRequest(uint8_t* data, uart_packet_link_t link_typ
 void Cmd_UART_Drill_A_Bridge_Set(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Drill_B_Bridge_Set(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Drill_C_Bridge_Set(uint8_t* data, uart_packet_link_t link_type);
-void Cmd_UART_Drill_GetWeightRequest(uint8_t* data, uart_packet_link_t link_type);
+void Cmd_UART_Drill_SetGear(uint8_t* data, uart_packet_link_t link_type);
 void Cmd_UART_Drill_Autonomy(uint8_t* data, uart_packet_link_t link_type);
 
 // --- UEUOS v2 ---
