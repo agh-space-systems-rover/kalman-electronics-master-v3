@@ -129,7 +129,7 @@ void Cmd_UART_Universal_DistanceResponse(uint8_t* data){
             .cmd = UART_CMD_UNIVERSAL_DISTANCE_RESPONSE,
             .arg_count = UART_ARG_UNIVERSAL_DISTANCE_RESPONSE,
             // .origin = logic.link_type
-            .origin = logic.link_type | LINK_RF_UART // Allow response to be sent to any link, as distance measurement might be requested by different modules
+            .origin = LINK_UART_ANY // Allow response to be sent to any link, as distance measurement might be requested by different modules
     };
 
     memcpy(&msg.args, data, UART_ARG_UNIVERSAL_DISTANCE_RESPONSE);
