@@ -120,9 +120,9 @@ void Cmd_UART_Motor_GetTemperature(void) {
     };
 
     for(uint8_t i = 0; i < 4; i++)
-        msg.args[i] = bus_motor.motor_temperature.propulsion_temperature[i];
+        msg.args[i] = bus_motor.motor_temperature.propulsion_temperature[i].umc_temp;
     for(uint8_t i = 0; i < 4; i++)
-        msg.args[4 + i] = bus_motor.motor_temperature.turn_temperature[i];
+        msg.args[4 + i] = bus_motor.motor_temperature.turn_temperature[i].umc_temp;
 
     Queues_SendUARTFrame(&msg);
 }

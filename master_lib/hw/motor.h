@@ -3,8 +3,15 @@
 
 #include "stdint.h"
 
+
+typedef struct {
+    uint8_t umc_temp;
+    uint8_t carrier_temp;
+    uint8_t gate_driver_temp;
+} motor_temperature_t; 
+
 /**
- * struktura reprezentujaca modul Motor Controller v2
+ * struktura reprezentujaca modul Motor Controller v2 / UMC
  */
 typedef struct {
     //dane wysylane cyklicznie do modulu
@@ -20,8 +27,8 @@ typedef struct {
     uint8_t status;             //!< status kontrolera
 
     struct {
-        uint8_t propulsion_temperature[4];
-        uint8_t turn_temperature[4];
+        motor_temperature_t propulsion_temperature[4];
+        motor_temperature_t turn_temperature[4];
     } motor_temperature;
 } motor_controller_t;
 
