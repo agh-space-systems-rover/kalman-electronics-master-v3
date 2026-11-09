@@ -119,10 +119,11 @@ void Cmd_UART_Motor_GetTemperature(void) {
         .origin = logic.link_type | LINK_RF_UART, // When using autonomy mode, send a frame onto rf channel as well
     };
 
-    for(uint8_t i = 0; i < 4; i++)
-        msg.args[i] = bus_motor.motor_temperature.propulsion_temperature[i].umc_temp;
-    for(uint8_t i = 0; i < 4; i++)
-        msg.args[4 + i] = bus_motor.motor_temperature.turn_temperature[i].umc_temp;
+    // serialize temperature readings struct to u8 array
+    const volatile uint8_t *temperatures = (const volatile uint8_t *)&bus_motor.motor_temperature;
+    for (uint8_t i = 0; i < UART_ARG_MOTOR_GET_TEMPERATURE; i++) {
+        msg.args[i] = temperatures[i];
+    }
 
     Queues_SendUARTFrame(&msg);
 }
